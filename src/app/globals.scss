@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rich-text-content a {
+  color: blue;
+  text-decoration: underline;
+  /* 他のスタイルプロパティを追加 */
+}
