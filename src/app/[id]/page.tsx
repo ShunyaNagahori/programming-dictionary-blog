@@ -1,24 +1,25 @@
 import parse from 'html-react-parser';
-import React from 'react'
 import { getData } from '@/client';
 
 
 async function page({ params }: { params: { id: string } }) {
   const post = await getData(params.id);
   const text = post.body.replace(/<p>/g, '<br />').replace(/<\/p>/g, '');
+  console.log(post)
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center w-screen'>
       <h1 className="text-center mt-4 text-xl">{post.title}</h1>
       <div className="my-5 w-2/3">
         <span className='text-sm text-gray-400'>カテゴリー「{post.category}」</span>
-          <div style={{
+          {/* <div style={{
             whiteSpace: 'pre',
-          }} className='rich-text-content'>
+          }} className='rich-text-content'> */}
+          <div className='rich-text-content'>
             { parse(text) }
           </div>
       </div>
-      <a href={'/'} className='my-8 border p-2 bg-black text-white'>戻る</a>
+      <a href='/' className='my-8 border p-2 bg-black text-white'>戻る</a>
     </div>
   )
 }

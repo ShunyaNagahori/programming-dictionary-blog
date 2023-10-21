@@ -1,5 +1,5 @@
 export async function getAllData() {
-  const res = await fetch('https://blog-next-shunya.microcms.io/api/v1/programming-dictionary', { headers: { "x-api-key": "7RPXSTv5fYWH4DnDy6b0VXLuYXPvE4yeC2nx" }, cache: 'no-cache'})
+  const res = await fetch('https://blog-next-shunya.microcms.io/api/v1/programming-dictionary?limit=30000', { headers: { "x-api-key": "7RPXSTv5fYWH4DnDy6b0VXLuYXPvE4yeC2nx" }, cache: 'no-cache'})
   return res.json();
 }
 

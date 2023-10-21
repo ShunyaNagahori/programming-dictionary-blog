@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 const Article = () => {
 
   const [allPosts, setAllPosts] = useState<Post[] | undefined>(undefined);
+  const [keyword, setKeyword] = useState<string>('');
 
   useEffect(() => {
     async function getData() {
@@ -17,17 +18,33 @@ const Article = () => {
   }, [])
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
+    const filteredPosts = allPosts?.filter((post: Post) =>
+      post.title.includes(keyword)
+    )
+    setAllPosts(filteredPosts);
+  }
+
+  const handleReset = () => {
+    async function getData() {
+      const data = await getAllData();
+      setAllPosts(data.contents);
+    }
+    getData();
+    setKeyword('');
   }
 
   return (
     <div className='w-1/2'>
-      <form className=''>
-        <input type='text' className='border border-gray-400' onChange={handleSearchChange}/>
-        <button type='submit' className='border px-1 border-gray-400 ml-1' onSubmit={handleSubmit}>検索</button>
+      <form onSubmit={handleSubmit}>
+        <input type='text' className='border border-gray-400' onChange={handleSearchChange} value={keyword}/>
+        <button type='submit' className='border px-1 border-gray-400 ml-1'>検索</button>
+        <button type='button' className='border px-1 border-gray-400 ml-1' onClick={handleReset}>リセット</button>
       </form>
       <ul>
         {allPosts ? allPosts.map((post: Post) => (
