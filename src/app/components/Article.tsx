@@ -69,7 +69,8 @@ const Article = () => {
           </li>
         )) : <p>Loading...</p>}
       </ul>
-      <ReactPaginate
+      {currentPosts ? (
+        <ReactPaginate
         pageCount={pageCount}
         onPageChange={handlePageChange}
         breakLabel={<span className="mr-4">...</span>}
@@ -92,6 +93,7 @@ const Article = () => {
         pageClassName="block border- border-solid border-lightGray hover:bg-lightGray w-10 h-10 flex items-center justify-center rounded-md mr-4"
         activeClassName="bg-black text-white"
       />
+      ) : null}
     </div>
   )
 }
